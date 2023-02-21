@@ -19,3 +19,10 @@ class Solution:
         if s_dict==t_dict:
             return True
         return False
+
+    
+    #much better solution from astroevska
+    #source: https://leetcode.com/problems/valid-anagram/solutions/3095544/collections-fast-and-simple-solution/?languageTags=python
+    class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return collections.Counter(s) == collections.Counter(t)
