@@ -7,3 +7,4 @@ class Solution:
             else:
                 visited.add(cur)  
         return False 
+    #time complexity: O(n)
