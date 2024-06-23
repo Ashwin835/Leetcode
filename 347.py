@@ -1,12 +1,26 @@
 class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:    
-            counts= dict()
-            for cur in nums: #O(n)
-                if cur not in counts.keys(): #O(1) lookup
-                    counts[cur]=1 #adding this is O(1) 
-                else:
-                    counts[cur]= counts.get(cur)+1 #updating is O(1)
-            sorted_counts= dict(sorted(counts.items(), key=lambda x: x[1], reverse=True)) #O(nlogn to sort)
-            return list(sorted_counts.keys())[:k]
-#runtime: O(n) + O(nlogn)= O(n)
-#source for sorted() method: https://flexiple.com/python/python-sort-dictionary-by-value
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+
+        visited= {}
+        return_list=[]
+        #let n = number of elements in nums
+
+        #O(n) operation
+        for cur in nums:
+            visited[cur]=1 + visited.get(cur,0)
+        
+        #Bucket sort
+        sortings= [[] for i in range(len(nums)+1)]
+
+        #O(n) operation
+        for key, value in visited.items():
+            sortings[value].append(key)
+        
+        #O(n) operation
+        for i in range (len(nums), 0, -1):
+            for current in sortings[i]:
+                return_list.append(current)
+                if len(return_list)==k:
+                    return return_list
+        
+        #time complexity: 3O(n)= O(n)
