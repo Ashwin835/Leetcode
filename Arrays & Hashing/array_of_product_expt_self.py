@@ -1,17 +1,23 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        products=[1] * len(nums)
-
-        new_products= nums[0]
-
-        for i in range (len(nums)-2, -1, -1):
-            products[i]= products[i+1] * nums[i+1]
-
-        for j in range(1, len(nums)):
-            print(nums[j])
-            products[j] = new_products * products[j]
-            new_products *= nums[j]
         
-        return products
+        backwards= 1
+        solution_array= [1] * len(nums)
+
+        #runtime: O(n)
+        for i in range (len(nums)-1,-1,-1):
+            solution_array[i]*= backwards
+            backwards*= nums[i]
+        
+        forwards=1 * nums[0]
+
+        # runtime: O(n-1)
+        for j in range(1,len(nums),1):
+            solution_array[j]*= forwards  
+            forwards*= nums[j]
+
+        return solution_array     
+
+#runtime: O(n)  
 
 
