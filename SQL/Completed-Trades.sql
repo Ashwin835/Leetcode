@@ -50,8 +50,9 @@ In the given dataset, San Francisco has the highest number of completed trade or
 */
 
 
-SELECT city, COUNT(CASE WHEN status='Completed' THEN quantity ELSE NULL END) AS total_orders
+SELECT city, COUNT(order_id) AS total_orders
 FROM trades INNER JOIN users ON trades.user_id = users.user_id
+WHERE status='Completed'
 GROUP BY city
 ORDER BY total_orders DESC
 LIMIT 3;
